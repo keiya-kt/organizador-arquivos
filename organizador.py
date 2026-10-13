@@ -22,13 +22,12 @@ def nome_disponivel(destino, arquivo):
 downloads = Path.home() / "Downloads"
 
 sufixo_imagem = [".jpg", ".jpeg", ".png", ".gif"]
-sufixo_video = [".mp4", ".mkv", ".avi"]
+sufixo_video = [".mp4", ".mkv", ".avi", ".webm"]
 sufixo_audio = [".mp3", ".wav", ".flac"]
 sufixo_documento = [".doc", ".docx", ".odt", ".txt", ".rtf"]
 sufixo_compactado = [".zip", ".rar", ".7z", ".tar", ".gz"]
-sufixo_programa = [".exe", ".msi"]
-
-print(downloads)
+sufixo_programa = [".exe", ".msi", ".jar", ".msix"]
+sufixo_planilha = [".xlsx", ".csv"]
 
 for arquivo in downloads.iterdir():
     if not arquivo.is_file():
@@ -36,56 +35,31 @@ for arquivo in downloads.iterdir():
 
     if arquivo.suffix in sufixo_imagem:
         destino = downloads / "Imagens"
-        destino.mkdir(exist_ok=True)
-
-        caminho_final = nome_disponivel(destino, arquivo)
-        shutil.move(arquivo, caminho_final)
 
     elif arquivo.suffix in sufixo_video:
         destino = downloads / "Video"
-        destino.mkdir(exist_ok=True)
-
-        caminho_final = nome_disponivel(destino, arquivo)
-        shutil.move(arquivo, caminho_final)
 
     elif arquivo.suffix in sufixo_audio:
         destino = downloads / "Audio"
-        destino.mkdir(exist_ok=True)
-
-        caminho_final = nome_disponivel(destino, arquivo)
-        shutil.move(arquivo, caminho_final)
 
     elif arquivo.suffix == ".pdf":
         destino = downloads / "PDFS"
-        destino.mkdir(exist_ok=True)
-
-        caminho_final = nome_disponivel(destino, arquivo)
-        shutil.move(arquivo, caminho_final)
 
     elif arquivo.suffix in sufixo_documento:
         destino = downloads / "Documentos"
-        destino.mkdir(exist_ok=True)
-
-        caminho_final = nome_disponivel(destino, arquivo)
-        shutil.move(arquivo, caminho_final)
 
     elif arquivo.suffix in sufixo_compactado:
         destino = downloads / "Compactados"
-        destino.mkdir(exist_ok=True)
-
-        caminho_final = nome_disponivel(destino, arquivo)
-        shutil.move(arquivo, caminho_final)
 
     elif arquivo.suffix in sufixo_programa:
         destino = downloads / "Programas"
-        destino.mkdir(exist_ok=True)
 
-        caminho_final = nome_disponivel(destino, arquivo)
-        shutil.move(arquivo, caminho_final)
+    elif arquivo.suffix in sufixo_planilha:
+        destino = downloads / "Planilhas"
 
     else:
         destino = downloads / "Outros"
-        destino.mkdir(exist_ok=True)
 
-        caminho_final = nome_disponivel(destino, arquivo)
-        shutil.move(arquivo, caminho_final)
+    destino.mkdir(exist_ok=True)
+    caminho_final = nome_disponivel(destino, arquivo)
+    shutil.move(arquivo, caminho_final)
